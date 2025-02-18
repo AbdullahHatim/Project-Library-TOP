@@ -17,9 +17,13 @@ function addBookToLibrary(name, author, pages) {
 }
 
 function displayBooks() {
-  myLibrary.forEach((book) => {
+  myLibrary.forEach((book, index) => {
     const bookCard = document.createElement("div");
     bookCard.classList.add("book-card");
+    bookCard.setAttribute("data-index", index);
+
+    const bookDetails = document.createElement("div");
+    bookDetails.classList.add("book-details");
 
     const Name = document.createElement("h2");
     Name.textContent = book.name;
@@ -30,11 +34,44 @@ function displayBooks() {
     const PageCount = document.createElement("p");
     PageCount.textContent = `${book.pages} Pages`;
 
-    bookCard.appendChild(Name);
-    bookCard.appendChild(Author);
-    bookCard.appendChild(PageCount);
+    bookDetails.appendChild(Name);
+    bookDetails.appendChild(Author);
+    bookDetails.appendChild(PageCount);
 
-    const addButton = document.querySelector(".add-button");
+    const removeButton = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "svg"
+    );
+    removeButton.setAttribute("viewBox", "0 0 24 24");
+    removeButton.setAttribute("width", "24"); // Adjust size as needed
+    removeButton.setAttribute("height", "24");
+    removeButton.classList.add("remove-button");
+    const title = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "title"
+    );
+    title.textContent = "Remove";
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute(
+      "d",
+      "M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z"
+    );
+    removeButton.appendChild(title);
+    removeButton.appendChild(path);
+
+    removeButton.addEventListener("click", function () {
+      const indexToRemove = parseInt(
+        this.closest(".book-card").dataset.index,
+        10
+      );
+      myLibrary.splice(indexToRemove, 1);
+      clearBooks();
+      displayBooks();
+    });
+
+    bookCard.appendChild(bookDetails);
+    bookCard.appendChild(removeButton);
+
     bookContainer.insertBefore(bookCard, addButton);
   });
 }
