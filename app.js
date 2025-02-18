@@ -1,19 +1,13 @@
-function Book(title, author, pages, read) {
-  this.title = title;
+const myLibrary = [];
+
+function Book(name, author, pages) {
+  this.name = name;
   this.author = author;
   this.pages = pages;
-  this.read = read;
-  this.info = function () {
-    return `${this.title} by ${this.author}, ${this.pages}, ${!this.title? "read": "not read yet"}`;
-  };
 }
 
-theHobbit = new Book("The Hobbit","J.R.R. Tolkien",295,false);
-console.log(theHobbit.info());
-
-let animal = {
-  eats: true
-};
-let rabbit = {
-  jumps: true
-};
+function addBookToLibrary(name, author, pages) {
+  // take params, create a book then store it in the array
+  const book = new Book(name, author, pages);
+  myLibrary.push(book);
+}
