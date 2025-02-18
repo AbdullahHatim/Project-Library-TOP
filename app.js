@@ -16,6 +16,28 @@ function addBookToLibrary(name, author, pages) {
   myLibrary.push(book);
 }
 
+function createRemoveButtonSVG() {
+  const removeButton = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "svg"
+  );
+  removeButton.setAttribute("viewBox", "0 0 24 24");
+  removeButton.setAttribute("width", "24"); // Adjust size as needed
+  removeButton.setAttribute("height", "24");
+  removeButton.classList.add("remove-button");
+  const title = document.createElementNS("http://www.w3.org/2000/svg", "title");
+  title.textContent = "trash-can-outline";
+  const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  path.setAttribute(
+    "d",
+    "M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z"
+  );
+  removeButton.appendChild(title);
+  removeButton.appendChild(path);
+
+  return removeButton;
+}
+
 function displayBooks() {
   myLibrary.forEach((book, index) => {
     const bookCard = document.createElement("div");
@@ -38,26 +60,7 @@ function displayBooks() {
     bookDetails.appendChild(Author);
     bookDetails.appendChild(PageCount);
 
-    const removeButton = document.createElementNS(
-      "http://www.w3.org/2000/svg",
-      "svg"
-    );
-    removeButton.setAttribute("viewBox", "0 0 24 24");
-    removeButton.setAttribute("width", "24"); // Adjust size as needed
-    removeButton.setAttribute("height", "24");
-    removeButton.classList.add("remove-button");
-    const title = document.createElementNS(
-      "http://www.w3.org/2000/svg",
-      "title"
-    );
-    title.textContent = "Remove";
-    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    path.setAttribute(
-      "d",
-      "M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z"
-    );
-    removeButton.appendChild(title);
-    removeButton.appendChild(path);
+    const removeButton = createRemoveButtonSVG();
 
     removeButton.addEventListener("click", function () {
       const indexToRemove = parseInt(
