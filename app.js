@@ -42,6 +42,35 @@ function createRemoveButtonSVG() {
   return removeButton;
 }
 
+function createReadStatusEmoji(book) {
+  const emoji = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  emoji.setAttribute("viewBox", "0 0 24 24");
+  emoji.setAttribute("width", "24");
+  emoji.setAttribute("height", "24");
+  emoji.classList.add("read-status-emoji");
+
+  const title = document.createElementNS("http://www.w3.org/2000/svg", "title");
+  title.textContent = book.read ? "Read" : "Not Read";
+  emoji.appendChild(title);
+
+  const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+  text.setAttribute("x", "12");
+  text.setAttribute("y", "18");
+  text.setAttribute("text-anchor", "middle");
+  text.setAttribute("font-size", "18");
+
+  text.textContent = book.read ? "🟢" : "🔴";
+  emoji.appendChild(text);
+
+  emoji.addEventListener("click", function () {
+    book.toggleRead();
+    title.textContent = book.read ? "Read" : "Not Read";
+    text.textContent = book.read ? "🟢" : "🔴";
+  });
+
+  return emoji;
+}
+
 function displayBooks() {
   myLibrary.forEach((book, index) => {
     const bookCard = document.createElement("div");
@@ -65,6 +94,9 @@ function displayBooks() {
     bookDetails.appendChild(PageCount);
 
     const removeButton = createRemoveButtonSVG();
+
+    const readStatusEmoji = createReadStatusEmoji(book);
+    bookCard.appendChild(readStatusEmoji);
 
     removeButton.addEventListener("click", function () {
       const indexToRemove = parseInt(

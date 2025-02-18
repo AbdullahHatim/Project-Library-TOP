@@ -85,3 +85,11 @@ body {
   flex-direction: column;
   align-items: center;
 }
+
+.read-status-emoji {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  cursor: pointer;
+  user-select: none;
+}
