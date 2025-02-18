@@ -3,3 +3,34 @@
 html {
   font-family: system-ui, sans-serif;
 }
+
+body {
+  padding: 20px;
+}
+
+.book-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: antiquewhite;
+  border: dashed 2px thistle;
+  padding: 20px 0px 20px 0px;
+}
+
+.book-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 16px;
+  padding: 16px;
+  background: whitesmoke;
+  border: 2px grey solid;
+}
+
+.add-button {
+  background-color: lightcyan;
+  border: dashed 2px paleturquoise;
+}
+
+.add-button:hover {
+  opacity: 75%;
+}
