@@ -9,7 +9,11 @@ function Book(name, author, pages) {
   this.name = name;
   this.author = author;
   this.pages = pages;
+  this.read = false;
 }
+Book.prototype.toggleRead = function () {
+  this.read = !this.read;
+};
 
 function addBookToLibrary(name, author, pages) {
   const book = new Book(name, author, pages);
