@@ -5,15 +5,17 @@ const cancelAddBookButton = document.querySelector("#cancel-add-book");
 const bookForm = document.getElementById("book-form");
 const myLibrary = [];
 
-function Book(name, author, pages) {
-  this.name = name;
-  this.author = author;
-  this.pages = pages;
-  this.read = false;
+class Book {
+  constructor(name, author, pages){
+    this.name = name;
+    this.author = author;
+    this.pages = pages;
+    this.read = false;
+  }
+  toggleRead() {
+    this.read = !this.read;
+  }
 }
-Book.prototype.toggleRead = function () {
-  this.read = !this.read;
-};
 
 function addBookToLibrary(name, author, pages) {
   const book = new Book(name, author, pages);
