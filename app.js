@@ -139,14 +139,39 @@ addButton.addEventListener('click', showAddBookForm)
 
 cancelAddBookButton.addEventListener('click', hideAddBookForm)
 
+// Add required attributes to form inputs in HTML
+// <input id="book-name" required minlength="1" maxlength="100">
+// <input id="book-author" required minlength="1" maxlength="100">
+// <input id="book-pages" required type="number" min="1">
+
 bookForm.addEventListener('submit', function (event) {
   event.preventDefault()
 
-  const bookName = document.getElementById('book-name').value
-  const bookAuthor = document.getElementById('book-author').value
-  const bookPages = document.getElementById('book-pages').value
+  const nameInput = document.getElementById('book-name')
+  const authorInput = document.getElementById('book-author')
+  const pagesInput = document.getElementById('book-pages')
 
-  addBookToLibrary(bookName, bookAuthor, bookPages)
+  // Validate each field
+  let isValid = true
+
+  if (!nameInput.checkValidity()) {
+    nameInput.reportValidity()
+    isValid = false
+  }
+
+  if (!authorInput.checkValidity()) {
+    authorInput.reportValidity()
+    isValid = false
+  }
+
+  if (!pagesInput.checkValidity()) {
+    pagesInput.reportValidity()
+    isValid = false
+  }
+
+  if (!isValid) return
+
+  addBookToLibrary(nameInput.value, authorInput.value, pagesInput.value)
 
   bookForm.reset()
 
@@ -155,6 +180,12 @@ bookForm.addEventListener('submit', function (event) {
   clearBooks()
   displayBooks()
 })
+
+// CSS for invalid fields
+// input:invalid {
+//   border-color: #ff4444;
+//   background-color: #ffebee;
+// }
 
 addBookToLibrary('To Kill a Mockingbird', 'Harper Lee', 281)
 addBookToLibrary('1984', 'George Orwell', 328)

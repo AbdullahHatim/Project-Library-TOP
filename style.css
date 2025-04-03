@@ -93,3 +93,8 @@ body {
   cursor: pointer;
   user-select: none;
 }
+
+input:focus:invalid {
+  border-color: #ff4444;
+  background-color: antiquewhite;
+}
